@@ -60,6 +60,8 @@ def building_number_map(id: int | str) -> int:
             return x - 22
         case x if x >= 49 and x <= 52:
             return x - 24
+        case x if 71 <= x <= 73:
+            return x - 42
         case other:
             return other
 
@@ -205,7 +207,7 @@ header = {
 response = requests.get(URL, headers=header)
 
 try:
-    remain = float(re.findall((r"(\d+(\.\d+)?)度"), response.text)[0][0])
+    remain = float(re.findall(r"(-?\d+(?:\.\d+)?)度", response.text)[0])
     logging.info(f"剩余电量：{remain}")
 except Exception as e:
     logging.exception(e)
